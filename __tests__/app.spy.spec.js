@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { getData } = require('../app');
+const { getData } = require('../server');
 
 describe('App spy on tests', () => {
   it('Should generate random bytes', async () => {

@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/v1/user
+Content-Type: application/json
+
+{
+  "firstName": "Apache",
+  "lastName": "Linux"
+}
+
