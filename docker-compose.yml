@@ -1,0 +1,30 @@
+version: '3'
+services:
+  job_node:
+    container_name: 'job_node'
+    image: node
+    volumes:
+      - ./:/app
+    working_dir: /app
+    user: 'node'
+    environment:
+      - NODE_ENV=dev
+    depends_on:
+      - job_mongo
+      - job_redis
+    ports:
+      - 3000:3000
+  job_mongo:
+    container_name: 'job_mongo'
+    image: mongo
+    volumes:
+      - /var/www/docker_data/mongo/data:/data/db
+    expose:
+      - 27017
+    ports:
+      - '27017:27017'
+  job_redis:
+    container_name: 'job_redis'
+    image: redis
+    ports:
+      - '6379:6379'

@@ -2,9 +2,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import routes from '#src/routes';
 
+import redisClient from '#src/middlewares/redisClient';
+
 const app = express();
 
 const port = process.env.port || 3000;
+
+app.use(redisClient());
 
 // urlencoded - this type of body will be convert
 // extended - which need to allow rich data or simple data
