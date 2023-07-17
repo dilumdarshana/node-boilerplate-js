@@ -1,12 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from '#src/routes';
-
 import redisClient from '#src/middlewares/redisClient';
+import mongoDbConnector from '#core/mongoConnector';
 
 const app = express();
 
 const port = process.env.port || 3000;
+
+mongoDbConnector();
 
 app.use(redisClient());
 

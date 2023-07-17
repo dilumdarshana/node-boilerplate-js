@@ -1,8 +1,10 @@
-POST http://localhost:5000/api/v1/user
+POST http://localhost:3000/api/v1/user
 Content-Type: application/json
 
 {
   "firstName": "Apache",
-  "lastName": "Linux"
+  "lastName": "Linux",
+  "email": "test5@gmail.com",
+  "phone": "12344"
 }
 
