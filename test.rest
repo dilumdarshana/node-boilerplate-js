@@ -2,9 +2,25 @@ POST http://localhost:3000/api/v1/user
 Content-Type: application/json
 
 {
-  "firstName": "Apache",
-  "lastName": "Linux",
-  "email": "test5@gmail.com",
+  "first_name": "Jerom",
+  "last_name": "Powel",
+  "email": "jerom@gmail.com",
   "phone": "12344"
 }
 
+###
+GET http://localhost:3000/api/v1/user
+Content-Type: application/json
+
+{
+    "search_by": "dilum",
+    "page_no": 1,
+    "items_per_page": 10,
+    "options": {
+        "sort": {
+            "field": "",
+            "order": ""
+        },
+        "filters": { }
+    }
+}

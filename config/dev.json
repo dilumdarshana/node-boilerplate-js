@@ -16,5 +16,8 @@
       "port": 6379,
       "name": "redis"
     }
+  },
+  "settings": {
+    "default_page_size": 10
   }
 }
