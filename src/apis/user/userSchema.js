@@ -8,9 +8,15 @@ const createUser = () => Joi.object().keys({
 });
 
 const getUsers = () => Joi.object().keys({
-  search_by: Joi.string().optional().label('Search By'),
-  page_no: Joi.number().optional().label('Page Number'),
-  items_per_page: Joi.number().optional().label('Items per page'),
+  search_by: Joi.string().allow('').label('Search By'),
+  page_no: Joi.number().required().label('Page Number'),
+  items_per_page: Joi.number().required().label('Items per page'),
+  options: Joi.object({
+    sort: Joi.object().keys({
+      order: Joi.number().allow('').valid(1, -1).label('Sort Order'),
+      field: Joi.string().allow('').valid('first_name', 'email').label('Sort Field'),
+    }).required(''),
+  }).required(),
 });
 
 export {

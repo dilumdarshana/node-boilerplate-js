@@ -1,4 +1,4 @@
-import { createUser } from '../userService.js';
+import { createUser, getUsers } from '../userService.js';
 import { UserModel } from '#models/index';
 
 const mockUser = {
@@ -31,5 +31,9 @@ describe('User Service', () => {
     const res = await createUser(mockUser);
 
     expect(res.message).toEqual('UserCreatedSuccessfully');
+  });
+
+  it('Should get all users', async () => {
+
   });
 });

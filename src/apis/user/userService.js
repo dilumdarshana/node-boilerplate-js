@@ -1,5 +1,7 @@
+import config from 'config';
 import { UserModel } from '#models/index';
 import { createResponse, createErrorResponse } from '#helpers/responseHelper';
+import { purifyStringForRegex } from '#helpers/commonHelper';
 
 /**
  * Create new user
@@ -31,25 +33,63 @@ const createUser = async (data) => {
   }
 };
 
-const getUsers = async (data) => {console.log('data', data)
+const getUsers = async (data) => {
   try {
     const {
       search_by: searchBy,
       page_no: pageNo,
       items_per_page: itemsPerPage,
       options: {
-          sort: {
-              field,
-              order,
-          },
+        sort: {
+          field,
+          order,
+        },
       },
     } = data;
-console.log('p'. process.env.default_page_size)
-    const limit = itemsPerPage || '';
 
-    const users = await UserModel.find({}, 'first_name last_name email phone');
+    const pipelineOptions = [];
+    let queryString = {};
+    let sortCondition = {};
 
-    return createResponse('UsersFetchedSuccessfully', 200, users);
+    // search by term
+    if (searchBy !== '') {
+      const searchTerm = purifyStringForRegex(searchBy);
+      let criteria = '';
+
+      criteria = [
+        { first_name: { $regex: new RegExp(`.*${searchTerm}.*`, 'i') } },
+        { last_name: { $regex: new RegExp(`.*${searchTerm}.*`, 'i') } },
+        { email: { $regex: new RegExp(`.*${searchTerm}.*`, 'i') } },
+      ];
+
+      queryString = { $match: { $or: criteria } };
+
+      pipelineOptions.push(queryString);
+    }
+
+    // sort order
+    if (field !== null && field && order !== null && order) {
+      sortCondition = { $sort: { [field]: order } };
+
+      pipelineOptions.push(sortCondition);
+    }
+
+    // set limit
+    const limit = itemsPerPage || config.settings.default_page_size;
+
+    const skip = (pageNo - 1) * itemsPerPage;
+
+    // fetch list of users
+    const users = await UserModel.aggregate([...pipelineOptions, { $skip: skip }, { $limit: limit }]);
+
+    const output = {
+      total: 1,
+      items_per_page: limit,
+      page_no: pageNo,
+      users,
+    };
+
+    return createResponse('UsersFetchedSuccessfully', 200, output);
   } catch (err) {
     console.log('Error on getUsers', err);
   }
