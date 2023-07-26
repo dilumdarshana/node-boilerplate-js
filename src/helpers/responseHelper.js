@@ -34,20 +34,16 @@ const defaultResolve = async (response, data) => {
   response.status(200).json(data);
 };
 
-const createResponse = (message, statusCode, data) => {
-  return {
-    message,
-    statusCode,
-    data,
-  };
-};
+const createResponse = (message, statusCode, data) => ({
+  message,
+  statusCode,
+  data,
+});
 
-const createErrorResponse = (message, statusCode) => {
-  return {
-    message,
-    statusCode,
-  };
-};
+const createErrorResponse = (message, statusCode) => ({
+  message,
+  statusCode,
+});
 
 export {
   defaultReject,

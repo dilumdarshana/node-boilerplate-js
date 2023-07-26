@@ -1,5 +1,5 @@
-import { createUser, getUsers } from '../userService.js';
 import { UserModel } from '#models/index';
+import { createUser, getUsers } from '../userService';
 
 const mockUser = {
   firstName: 'Apache',
@@ -13,7 +13,7 @@ const mockUserRes = {
   last_name: 'Linux',
   email: 'test@gmail.com',
   phone: '1234',
-}
+};
 
 describe('User Service', () => {
   it('Should validate email exits', async () => {
@@ -34,6 +34,6 @@ describe('User Service', () => {
   });
 
   it('Should get all users', async () => {
-    
+    await getUsers();
   });
 });

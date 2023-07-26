@@ -1,7 +1,8 @@
-const purifyStringForRegex = (string) => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-};
+const purifyStringForRegex = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const test = () => console.log('test');
 
 export {
   purifyStringForRegex,
-}
+  test,
+};

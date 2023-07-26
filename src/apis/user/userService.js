@@ -10,7 +10,9 @@ import { purifyStringForRegex } from '#helpers/commonHelper';
  */
 const createUser = async (data) => {
   try {
-    const { first_name: firstName, last_name: lastName, email, phone } = data;
+    const {
+      first_name: firstName, last_name: lastName, email, phone,
+    } = data;
     const customerExists = await UserModel.findOne({ email });
 
     // check user already exists

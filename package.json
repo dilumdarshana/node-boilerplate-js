@@ -6,7 +6,16 @@
   "type": "module",
   "scripts": {
     "test": "jest --config jest.spec.config.js --watchAll",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "lint": "eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
   },
   "imports": {
     "#root/*": "./*.js",
@@ -19,6 +28,13 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
     "jest": "^29.6.1",
     "nodemon": "^3.0.1"
   },

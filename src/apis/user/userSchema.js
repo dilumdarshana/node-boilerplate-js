@@ -22,4 +22,4 @@ const getUsers = () => Joi.object().keys({
 export {
   createUser,
   getUsers,
-}
+};

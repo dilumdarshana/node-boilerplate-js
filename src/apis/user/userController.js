@@ -1,4 +1,3 @@
-import controller from '#core/controller';
 import {
   createUser as createUserValidator,
   getUsers as getUsersValidator,
@@ -7,6 +6,7 @@ import {
   createUser as createUserService,
   getUsers as getUsersService,
 } from '#apis/user/userService';
+import controller from '#core/controller';
 
 const createUser = (req, res) => controller(req, res, {
   validator: createUserValidator,

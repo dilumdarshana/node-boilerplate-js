@@ -16,7 +16,6 @@ const getUsers = async (params) => {
   return validate(attributes, getUsersSchema);
 };
 
-
 export {
   createUser,
   getUsers,
