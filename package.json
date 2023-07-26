@@ -11,7 +11,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*.js": "yarn lint"
+    "src/**/*.js": ["prettier --write", "yarn lint"]
   },
   "imports": {
     "#root/*": "./*.js",
