@@ -5,6 +5,4 @@ const login = () => Joi.object().keys({
   password: Joi.string().required().label('Password'),
 });
 
-export {
-  login,
-};
+export default login;

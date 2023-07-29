@@ -1,15 +1,20 @@
 import jwt from 'jsonwebtoken';
 import config from 'config';
-import { createErrorResponse, defaultReject } from '#helpers/responseHelper';
+import { defaultReject } from '#helpers/responseHelper';
 
-export const auth = (req, res, next) => {
+const auth = async (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
     return defaultReject({ message: 'NoAuthorisationToken', code: 422 }, res);
   }
 
-  jwt.verify(authorization, config.jwt_secret);
-
+  try {
+    jwt.verify(authorization, config.jwt_secret);
+  } catch (err) {
+    return defaultReject({ message: 'Unauthorized', code: 401 }, res);
+  }
   next();
 };
+
+export default auth;

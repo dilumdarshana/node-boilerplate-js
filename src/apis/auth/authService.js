@@ -10,6 +10,7 @@ const login = (data) => {
     return createResponse('LoggedSuccessfully', 200, { token });
   } catch (err) {
     console.log('Error on login', err);
+    createErrorResponse('UnknownError', 500);
   }
 };
 

@@ -2,12 +2,12 @@ import express from 'express';
 import { createUser, getUsers } from '#apis/user/userController';
 import { createJob, getJobs } from '#apis/job/jobController';
 import login from '#apis/auth/authController';
-import { auth } from '#middlewares/auth';
+import auth from '#middlewares/auth';
 
 const router = express.Router();
 
 // auth
-router.route('/auth').post(login);
+router.route('/login').post(login);
 
 // user routes
 router.route('/user').post(createUser);

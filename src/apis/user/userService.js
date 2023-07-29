@@ -89,6 +89,17 @@ const getUsers = async (data) => {
       pipelineOptions.push(sortCondition);
     }
 
+    pipelineOptions.push({
+      $project: {
+        _id: 0,
+        first_name: 1,
+        last_name: 1,
+        email: 1,
+        phone: 1,
+        job: 1,
+      },
+    });
+
     // set limit
     const limit = itemsPerPage || config.settings.default_page_size;
 

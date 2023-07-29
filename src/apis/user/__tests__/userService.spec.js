@@ -15,6 +15,18 @@ const mockUserRes = {
   phone: '1234',
 };
 
+const mockGetAllUsersReq = {
+  search_by: '',
+  page_no: 1,
+  items_per_page: 10,
+  options: {
+    sort: {
+      field: 'title',
+      order: 1,
+    },
+  },
+};
+
 describe('User Service', () => {
   it('Should validate email exits', async () => {
     jest.spyOn(UserModel, 'findOne').mockResolvedValueOnce(mockUserRes);
@@ -34,6 +46,15 @@ describe('User Service', () => {
   });
 
   it('Should get all users', async () => {
-    await getUsers();
+    jest.spyOn(UserModel, 'aggregate').mockResolvedValueOnce([]);
+    jest.spyOn(UserModel, 'aggregate').mockResolvedValueOnce([{}]);
+
+    const res = await getUsers(mockGetAllUsersReq);
+
+    expect(res.message).toEqual('UsersFetchedSuccessfully');
+    expect(res.statusCode).toEqual(200);
+    expect(res.data).toMatchObject({
+      total: 0, items_per_page: 10, page_no: 1, users: [{}],
+    });
   });
 });

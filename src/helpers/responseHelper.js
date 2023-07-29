@@ -45,10 +45,6 @@ const createErrorResponse = (message, statusCode) => ({
   statusCode,
 });
 
-// const createErrorResponseStraightaway = (res) => {
-//   response.status(200).json(data);
-// }
-
 export {
   defaultReject,
   defaultResolve,

@@ -1,39 +1,35 @@
-import { UserModel } from '#models/index';
-import { createUser, getUsers } from '../userService';
+import { JobModel } from '#models/index';
+import { createJob, getJobs } from '../jobService';
 
-const mockUser = {
-  firstName: 'Apache',
-  lastName: 'Linux',
-  email: 'test@gmail.com',
-  phone: '1234',
+const mockJob = {
+  title: 'Software Engineer',
+  department: 'IT',
 };
 
-const mockUserRes = {
-  first_name: 'Apache',
-  last_name: 'Linux',
-  email: 'test@gmail.com',
-  phone: '1234',
+const mockJobRes = {
+  title: 'Software Engineer',
+  department: 'IT',
 };
 
-describe('User Service', () => {
-  it('Should validate email exits', async () => {
-    jest.spyOn(UserModel, 'findOne').mockResolvedValueOnce(mockUserRes);
+describe('Job Service', () => {
+  it('Should validate job exits', async () => {
+    jest.spyOn(JobModel, 'findOne').mockResolvedValueOnce(mockJobRes);
 
-    const res = await createUser(mockUser);
+    const res = await createJob(mockJob);
 
-    expect(res.message).toEqual('UserAlreadyExists');
+    expect(res.message).toEqual('JobAlreadyExists');
   });
 
-  it('Should create new user', async () => {
-    jest.spyOn(UserModel, 'findOne').mockResolvedValueOnce(null);
-    jest.spyOn(UserModel, 'create').mockResolvedValueOnce(mockUser);
+  it('Should create new job', async () => {
+    jest.spyOn(JobModel, 'findOne').mockResolvedValueOnce(null);
+    jest.spyOn(JobModel, 'create').mockResolvedValueOnce(mockJob);
 
-    const res = await createUser(mockUser);
+    const res = await createJob(mockJob);
 
-    expect(res.message).toEqual('UserCreatedSuccessfully');
+    expect(res.message).toEqual('JobCreatedSuccessfully');
   });
 
-  it('Should get all users', async () => {
-    await getUsers();
+  it('Should get all jobs', async () => {
+    await getJobs();
   });
 });

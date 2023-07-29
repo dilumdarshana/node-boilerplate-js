@@ -22,7 +22,7 @@ const UserSchema = new Schema({
     type: ObjectId,
     ref: 'Job',
     default: null,
-},
+  },
 }, { collection: 'user' });
 
 export default mongoose.model('User', UserSchema);
