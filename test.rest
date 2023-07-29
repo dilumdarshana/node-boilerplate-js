@@ -1,15 +1,51 @@
+
+POST http://localhost:3000/api/v1/auth
+Content-Type: application/json
+
+{
+    "email": "dilum.dar@gmail.com",
+    "password": "test"
+}
+
+###
 POST http://localhost:3000/api/v1/user
 Content-Type: application/json
 
 {
-  "first_name": "Jerom",
-  "last_name": "Powel",
-  "email": "jerom@gmail.com",
-  "phone": "12344"
+  "first_name": "Larry",
+  "last_name": "Chambel",
+  "email": "larry@gmail.com",
+  "phone": "5555",
+  "job": "64c0fd055807c550b9bd663b"
 }
 
 ###
 GET http://localhost:3000/api/v1/user
+Content-Type: application/json
+Authorization: xxxxxxx
+{
+    "search_by": "",
+    "page_no": 1,
+    "items_per_page": 20,
+    "options": {
+        "sort": {
+            "field": "first_name",
+            "order": "1"
+        }
+    }
+}
+
+###
+POST http://localhost:3000/api/v1/job
+Content-Type: application/json
+
+{
+  "title": "UI Engineer",
+  "department": "IT"
+}
+
+###
+GET http://localhost:3000/api/v1/job
 Content-Type: application/json
 
 {
@@ -18,8 +54,8 @@ Content-Type: application/json
     "items_per_page": 20,
     "options": {
         "sort": {
-            "field": "first_name",
-            "order": "-1"
+            "field": "title",
+            "order": "1"
         }
     }
 }

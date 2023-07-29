@@ -11,7 +11,7 @@ import { purifyStringForRegex } from '#helpers/commonHelper';
 const createUser = async (data) => {
   try {
     const {
-      first_name: firstName, last_name: lastName, email, phone,
+      first_name: firstName, last_name: lastName, email, phone, job,
     } = data;
     const customerExists = await UserModel.findOne({ email });
 
@@ -25,6 +25,7 @@ const createUser = async (data) => {
       last_name: lastName,
       email,
       phone,
+      job,
     };
 
     await UserModel.create(user);
@@ -69,6 +70,18 @@ const getUsers = async (data) => {
       pipelineOptions.push(queryString);
     }
 
+    // relate with jobs collection
+    const customerJob = {
+      $lookup: {
+        from: 'job',
+        localField: 'job',
+        foreignField: '_id',
+        as: 'job',
+      },
+    };
+
+    pipelineOptions.push(customerJob);
+
     // sort order
     if (field !== null && field && order !== null && order) {
       sortCondition = { $sort: { [field]: order } };
@@ -81,11 +94,16 @@ const getUsers = async (data) => {
 
     const skip = (pageNo - 1) * itemsPerPage;
 
+    // get total records count
+    const totalRecordPromise = UserModel.aggregate([...pipelineOptions]);
+
     // fetch list of users
-    const users = await UserModel.aggregate([...pipelineOptions, { $skip: skip }, { $limit: limit }]);
+    const usersPromise = UserModel.aggregate([...pipelineOptions, { $skip: skip }, { $limit: limit }]);
+
+    const [totalRes, users] = await Promise.all([totalRecordPromise, usersPromise]);
 
     const output = {
-      total: 1,
+      total: totalRes.length,
       items_per_page: limit,
       page_no: pageNo,
       users,

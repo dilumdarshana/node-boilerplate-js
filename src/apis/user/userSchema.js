@@ -5,6 +5,7 @@ const createUser = () => Joi.object().keys({
   last_name: Joi.string().required().label('Last Name'),
   email: Joi.string().email().required().label('Email'),
   phone: Joi.string().required().label('Phone'),
+  job: Joi.string().optional().allow('').label('Job'),
 });
 
 const getUsers = () => Joi.object().keys({

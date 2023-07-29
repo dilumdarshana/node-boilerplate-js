@@ -4,7 +4,7 @@ const JobSchema = new Schema({
   title: {
     type: String,
   },
-  level: {
+  department: {
     type: String,
   },
 }, { collection: 'job' });

@@ -19,5 +19,6 @@
   },
   "settings": {
     "default_page_size": 10
-  }
+  },
+  "jwt_secret": "5b9160de09c54ed64e62e7536c5dfee656a3622a378c8a7052a36a226dd36188033978014235f9992fd1a3c095e023cf"
 }

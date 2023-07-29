@@ -8,10 +8,14 @@
     "test": "jest --config jest.spec.config.js --watchAll",
     "dev": "nodemon src/server.js",
     "lint": "eslint src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "docker-compose run --service-ports --rm job_node yarn dev",
+    "stop": "docker-compose stop"
   },
   "lint-staged": {
-    "src/**/*.js": ["yarn lint"]
+    "src/**/*.js": [
+      "yarn lint"
+    ]
   },
   "imports": {
     "#root/*": "./*.js",
@@ -44,6 +48,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.4",
     "redis": "^4.6.7"
   }
