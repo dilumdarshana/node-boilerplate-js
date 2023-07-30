@@ -1,6 +1,6 @@
-# Rest boilerplate using Express JS
+# NodeJS rest boilerplate
 
-## Following tech stach will be used
+## Following tech stack used
 - ExpressJS
 - Jest
 - MongoDB
@@ -8,8 +8,17 @@
 - Docker
 - EsLint
 
+## Install dependency
+- docker-compose run --service-ports --rm job_node yarn install
+
 ## How run on local
-- docker-compose run --service-ports --rm job_node yarn dev
+- yarn start
+
+## How run unit tests
+- yarn test
+
+## How run lint
+- yarn lint
 
 ## How stop services
-- docker-compose stop
+- yarn stop

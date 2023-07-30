@@ -21,7 +21,7 @@ const mockGetAllUsersReq = {
   items_per_page: 10,
   options: {
     sort: {
-      field: 'title',
+      field: 'first_name',
       order: 1,
     },
   },

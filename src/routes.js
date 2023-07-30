@@ -6,17 +6,17 @@ import auth from '#middlewares/auth';
 
 const router = express.Router();
 
-// auth
+// auth routes
 router.route('/login').post(login);
 
 // user routes
-router.route('/user').post(createUser);
+router.post('/user', auth, createUser);
 
 router.get('/user', auth, getUsers);
 
 // job routes
-router.route('/job').post(createJob);
+router.post('/job', auth, createJob);
 
-router.route('/job').get(getJobs);
+router.get('/job', auth, getJobs);
 
 export default router;

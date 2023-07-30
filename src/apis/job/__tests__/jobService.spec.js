@@ -11,6 +11,18 @@ const mockJobRes = {
   department: 'IT',
 };
 
+const mockGetAllJobsReq = {
+  search_by: '',
+  page_no: 1,
+  items_per_page: 10,
+  options: {
+    sort: {
+      field: 'title',
+      order: 1,
+    },
+  },
+};
+
 describe('Job Service', () => {
   it('Should validate job exits', async () => {
     jest.spyOn(JobModel, 'findOne').mockResolvedValueOnce(mockJobRes);
@@ -30,6 +42,15 @@ describe('Job Service', () => {
   });
 
   it('Should get all jobs', async () => {
-    await getJobs();
+    jest.spyOn(JobModel, 'aggregate').mockResolvedValueOnce([]);
+    jest.spyOn(JobModel, 'aggregate').mockResolvedValueOnce([{}]);
+
+    const res = await getJobs(mockGetAllJobsReq);
+
+    expect(res.message).toEqual('JobsFetchedSuccessfully');
+    expect(res.statusCode).toEqual(200);
+    expect(res.data).toMatchObject({
+      total: 0, items_per_page: 10, page_no: 1, jobs: [{}],
+    });
   });
 });

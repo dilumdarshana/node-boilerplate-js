@@ -5,7 +5,6 @@ const mongoConnector = () => {
   mongoose.connect(
     `mongodb://${config.database.mongodb.host}:${config.database.mongodb.port}/${config.database.mongodb.name}`,
     { useNewUrlParser: true },
-
   );
 };
 
