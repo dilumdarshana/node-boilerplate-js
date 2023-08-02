@@ -1,9 +1,10 @@
 {
-  "name": "jest",
+  "name": "node-boilerplate-js",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/server.js",
   "license": "MIT",
   "type": "module",
+  "author": "Dilum Darshana (dilum.dar@gmail.com)",
   "scripts": {
     "test": "jest --config jest.spec.config.js --watchAll",
     "dev": "nodemon src/server.js",
